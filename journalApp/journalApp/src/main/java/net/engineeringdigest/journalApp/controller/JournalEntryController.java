@@ -25,9 +25,25 @@ public class JournalEntryController {
     }
 
     @PostMapping // endpoint becomes "localhost:8080/journal GET"
-    public boolean createEntry(@RequestBody JournalEntry myEntry) {
+    public boolean createEntry(@RequestBody JournalEntry myEntry) { //Request body takes data from request and converts it into a java object
         journalEntries.put(myEntry.getId(), myEntry);
         return true;
+    }
+
+    @GetMapping("id/{myId}")
+    public JournalEntry getJournalEntryById(@PathVariable Long myId) { //setting up end point for a specific entry
+        return journalEntries.get(myId);
+    }
+
+    @DeleteMapping("id/{myId}")
+    public JournalEntry deleteJournalEntryById(@PathVariable Long myId) { //deleting entry by id
+        return journalEntries.remove(myId);
+    }
+
+    //update entry
+    @PutMapping("id/{myId}")
+    public JournalEntry updateJournalById(@PathVariable Long myId, @RequestBody JournalEntry myEntry) {
+        return journalEntries.put(myId, myEntry);
     }
 
 }
