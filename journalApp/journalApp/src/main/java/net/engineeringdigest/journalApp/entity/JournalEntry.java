@@ -1,18 +1,21 @@
 package net.engineeringdigest.journalApp.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class JournalEntry {
     //making a class with the features of an entry
-    private long id;
+    private String id;
 
     private String title;
 
     private String content;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
