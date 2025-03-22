@@ -1,6 +1,8 @@
 package net.engineeringdigest.journalApp.controller;
 
 import net.engineeringdigest.journalApp.entity.JournalEntry;
+import net.engineeringdigest.journalApp.services.JournalEntryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,12 +15,17 @@ import java.util.Map;
 public class JournalEntryControllerV2 {
 
 
+    @Autowired
+    private JournalEntryService journalEntryService;
+
+
+
     /*Methods inside a controller class should
      be public so that they can be accessed and invoked
      by the Spring Framework or External HTTP Requests
      */
 
-    @GetMapping() // endpoint becomes "localhost:8080/journal GET"
+    @GetMapping // endpoint becomes "localhost:8080/journal GET"
     public List<JournalEntry> getAll() {
 
         return null;
@@ -26,6 +33,7 @@ public class JournalEntryControllerV2 {
 
     @PostMapping // endpoint becomes "localhost:8080/journal GET"
     public boolean createEntry(@RequestBody JournalEntry myEntry) { //Request body takes data from request and converts it into a java object
+        journalEntryService.saveEntry(myEntry);
         return true;
     }
 

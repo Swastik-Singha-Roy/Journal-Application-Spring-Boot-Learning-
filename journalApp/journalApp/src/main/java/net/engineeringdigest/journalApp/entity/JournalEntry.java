@@ -1,15 +1,29 @@
 package net.engineeringdigest.journalApp.entity;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import java.util.Date;
+
+@Document(collection = "journal_entries")
 public class JournalEntry {
     //making a class with the features of an entry
+    @Id
     private String id;
 
     private String title;
 
     private String content;
+
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public String getId() {
         return id;
