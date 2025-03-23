@@ -39,22 +39,28 @@ public class JournalEntryControllerV2 {
 
     @GetMapping("id/{myId}")
     public JournalEntry getJournalEntryById(@PathVariable ObjectId myId) { //setting up end point for a specific entry
+        //return JournalEntryService.findByID(myId).orElse(null);
+        return journalEntryService.findById(myId).orElse(null);
 
-        return null;
 
     }
 
     @DeleteMapping("id/{myId}")
-    public JournalEntry deleteJournalEntryById(@PathVariable ObjectId myId) { //deleting entry by id
-
-        return null;
+    public boolean deleteJournalEntryById(@PathVariable ObjectId myId) { //deleting entry by id
+        journalEntryService.deleteById(myId);
+        return true;
     }
 
     //update entry
     @PutMapping("id/{myId}")
-    public JournalEntry updateJournalById(@PathVariable ObjectId myId, @RequestBody JournalEntry myEntry) {
-
-        return null;
+    public JournalEntry updateJournalById(@PathVariable ObjectId myId, @RequestBody JournalEntry newEntry) {
+        JournalEntry old = journalEntryService.findById(myId).orElse(null);
+        if (old != null) {
+            old.setTitle(newEntry.getTitle() != null && !newEntry.getTitle().equals("") ? newEntry.getTitle() : old.getTitle());
+            old.setContent(newEntry.getContent() != null && !newEntry.getContent().equals("") ? newEntry.getContent() : old.getContent());
+        }
+        journalEntryService.saveEntry(old);
+        return old;
     }
 
 }
