@@ -2,6 +2,7 @@ package net.engineeringdigest.journalApp.entity;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -15,6 +16,7 @@ import java.util.Objects;
 //@Getter
 //@Setter
 @Data
+@NoArgsConstructor // deserialization refers to the process of converting JSON data into Java objects (POJOs)
 public class JournalEntry {
     //making a class with the features of an entry
     @Id
